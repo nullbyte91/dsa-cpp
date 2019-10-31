@@ -74,3 +74,10 @@ A stack is a container providing Last-In, First-Out (LIFO) access. Basically, yo
 A queue is a container providing First-In, First-Out (FIFO) access. You remove elements in the same order you insert them. It's difficult to get to any elements in the middle. Usually this goes on top of a deque.
 A priority_queue is a container providing sorted-order access to elements. You can insert elements in any order, and then retrieve the "lowest" of these values at any time. Priority queues in C++ STL use a heap structure internally, which in turn is basically array-backed; thus, usually this goes on top of a vector.
 See this reference page for more information, including time complexity for each of the operations and links to detailed pages for each of the container types.
+
+unordered_map vs unordered_set :
+In unordered_set, we have only key, no value, these are mainly used to see presence/absence in a set. For example, consider the problem of counting frequencies of individual words. We can’t use unordered_set (or set) as we can’t store counts.
+
+unordered_map vs map :
+map (like set) is an ordered sequence of unique keys whereas in unordered_map key can be stored in any order, so unordered.
+Map is implemented as balanced tree structure that is why it is possible to maintain an order between the elements (by specific tree traversal). Time complexity of map operations is O(Log n) while for unordered_set, it is O(1) on average.
