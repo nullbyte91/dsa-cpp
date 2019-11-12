@@ -25,26 +25,32 @@ inOrder(struct Bst *root){
     inOrder(root->right);
 }
 
-bool isBST(struct Bst* root)  
-{  
-    static Bst *prev = NULL;
-    // traverse the tree in inorder fashion  
-    // and keep track of prev node  
-    if (root)  
-    {  
-        if (!isBST(root->left))  
-        return false;  
+bool isBST(struct Bst * root)
+{
+    stack<struct Bst*> Stack;
+    struct Bst * prev = NULL;    
+    
+    if (root == NULL){
+        return true;
+    }
 
-        // Allows only distinct valued nodes  
-        if (prev != NULL &&  
-            root->data <= prev->data)  
-        return false;  
-  
-        prev = root;  
-  
-        return isBST(root->right);  
-    }  
-    return true;  
+    while (root != NULL || !Stack.empty()){
+        
+        while(root != NULL){
+            Stack.push(root);
+            root = root->left;
+        }
+
+        root = Stack.top();
+        Stack.pop();
+        
+        if (prev != NULL && prev->data >= root->data){
+            return false;
+        }
+        prev = root;
+        root = root->right;
+    }
+    return true;
 }
 
 int
@@ -54,7 +60,7 @@ main(int argc, char** argcv){
     root->right       = newNode(5); 
     root->left->left  = newNode(1); 
     root->left->right = newNode(4);
-    inOrder(root);
+    //inOrder(root);
     printf("%d", isBST(root));
     return 0;
 }
